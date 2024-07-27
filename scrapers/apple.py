@@ -27,7 +27,7 @@ def scrape_apple_jobs():
 
     try:
         # Fetch all current job IDs from the database
-        current_job_ids = {job.job_id for job in session.query(JobListing.job_id).all()}
+        current_job_ids = {job.job_id for job in session.query(JobListing.job_id).filter_by(company="Apple").all()}
 
         base_url = 'https://jobs.apple.com/en-us/search?location=united-states-USA&team=internships-STDNT-INTRN'
         driver.get(base_url)
@@ -60,7 +60,7 @@ def scrape_apple_jobs():
                 miscellaneous = wait.until(EC.presence_of_element_located((By.ID, "jd-job-summary"))).text
 
                 # Check if the job listing already exists
-                existing_listing = session.query(JobListing).filter_by(job_id=job_id).first()
+                existing_listing = session.query(JobListing).filter_by(job_id=job_id, company="Apple").first()
                 
                 if existing_listing:
                     # Update the existing job listing
@@ -99,7 +99,7 @@ def scrape_apple_jobs():
         # Find job IDs that are no longer present on the website and delete them
         job_ids_to_delete = current_job_ids - new_job_ids
         for job_id in job_ids_to_delete:
-            job_to_delete = session.query(JobListing).filter_by(job_id=job_id).first()
+            job_to_delete = session.query(JobListing).filter_by(job_id=job_id, company="Apple").first()
             if job_to_delete:
                 session.delete(job_to_delete)
                 session.commit()
