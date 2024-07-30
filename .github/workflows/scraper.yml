@@ -1,0 +1,29 @@
+name: Scrape Internships
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # This cron job runs every day at midnight UTC
+  workflow_dispatch: # Allows manual triggering of the workflow
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run scraper script
+      env:
+        DATABASE_URL: ${{ secrets.AWS_RDS_URL }}
+      run: python3 workflows/scrape_jobs.py
