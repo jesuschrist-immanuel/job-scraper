@@ -8,4 +8,5 @@ This project focuses on scraping internships in the USA from various companies. 
 - [Google](https://github.com/jesuschrist-immanuel/job-scraper/blob/main/scrapers/google.py)
 - [Amazon](https://github.com/jesuschrist-immanuel/job-scraper/blob/main/scrapers/amazon.py)
 - [Meta](https://github.com/jesuschrist-immanuel/job-scraper/blob/main/scrapers/meta.py)
-- Tesla (still working on)
+- [Tesla](https://github.com/jesuschrist-immanuel/job-scraper/blob/main/scrapers/tesla.py)
+  - Only considered AI & Robotics, Charging, Energy - Solar & Storage, Engineering & Information Technology, Finance, Supply Chain, and Vehicle Software
