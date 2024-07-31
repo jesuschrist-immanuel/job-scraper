@@ -1,4 +1,4 @@
-# TODO: build nvidia, amazon, meta, and tesla scrapers
+# TODO: build nvidia scraper
 
 from scrapers.apple import scrape_apple_jobs
 from scrapers.microsoft import scrape_microsoft_jobs
